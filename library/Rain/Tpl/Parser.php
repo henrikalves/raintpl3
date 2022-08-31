@@ -315,7 +315,7 @@ class Parser {
                 elseif (preg_match($tagMatch['include'], $html, $matches)) {
 
                     //get the folder of the actual template
-                    $actualFolder = $templateDirectory;
+                    $actualFolder = (string)$templateDirectory;
 
                     if (is_array($this->config['tpl_dir'])) {
                         foreach($this->config['tpl_dir'] as $tpl) {
@@ -609,7 +609,7 @@ class Parser {
                 // escape character
                 if ($this->config['auto_escape'] && $escape)
                     //$html = "htmlspecialchars( $html )";
-                    $html = "htmlspecialchars( $html, ENT_COMPAT, '" . $this->config['charset'] . "', FALSE )";
+                    $html = "htmlspecialchars( $html ?? '', ENT_COMPAT, '" . $this->config['charset'] . "', FALSE )";
 
                 // if is an assignment it doesn't add echo
                 if ($echo)
