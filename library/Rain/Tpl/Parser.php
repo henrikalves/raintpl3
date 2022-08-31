@@ -202,7 +202,7 @@ class Parser {
         if (flock($fp, LOCK_SH)) {
 
             // xml substitution
-            $code = preg_replace("/<\?xml(.*?)\?>/s", "##XML\\1XML##", $code);
+            $code = preg_replace("/<\?xml(.*?)\?>/s", "##XML\\1XML##", $code ?? "");
 
             // disable php tag
             if (!$this->config['php_enabled'])
@@ -574,7 +574,7 @@ class Parser {
             }
         }
 
-        $html = str_replace('?><?php', ' ', $parsedCode);
+		$parsedCode = str_replace('?><?php', ' ', $parsedCode ?? "");
 
         // Execute plugins, after_parse
         $context->code = $parsedCode;
